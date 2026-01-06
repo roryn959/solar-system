@@ -25,7 +25,7 @@ bool startup(SDL_Window*& window, SDL_Renderer*& renderer) {
 }
 
 void draw_background(SDL_Renderer*& renderer) {
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
 }
 
@@ -33,7 +33,7 @@ void mainloop(SDL_Window*& window, SDL_Renderer*& renderer) {
     Universe universe;
     Drawer drawer(renderer);
 
-	double lastTime = SDL_GetTicks();
+	double lastTime = SDL_GetTicks() / 1000.0;
 	double timeAccumulator{ 0.0 };
 
     bool running = true;
@@ -46,7 +46,7 @@ void mainloop(SDL_Window*& window, SDL_Renderer*& renderer) {
             }
         }
 
-		double time = SDL_GetTicks();
+		double time = SDL_GetTicks() / 1000.0;
 		timeAccumulator += (time - lastTime);
 
 		while (timeAccumulator > TICK_SIZE) {
@@ -58,8 +58,7 @@ void mainloop(SDL_Window*& window, SDL_Renderer*& renderer) {
 
         draw_background(renderer);
 
-        drawer.Render(universe.GetSun());
-        drawer.Render(universe.GetEarth());
+        drawer.Render(universe);
 
         SDL_RenderPresent(renderer);
     }
