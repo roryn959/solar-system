@@ -17,6 +17,7 @@ constexpr Colour COLOUR_SUN { 255, 236, 179 };
 constexpr Colour COLOUR_MERCURY { 169, 165, 158 };
 constexpr Colour COLOUR_VENUS { 221, 212, 187 };
 constexpr Colour COLOUR_EARTH { 100, 149, 237 };
+constexpr Colour COLOUR_MOON { 190, 190, 180 };
 constexpr Colour COLOUR_MARS { 193, 105, 73 };
 constexpr Colour COLOUR_JUPITER { 216, 189, 162 };
 constexpr Colour COLOUR_SATURN { 229, 205, 156 };

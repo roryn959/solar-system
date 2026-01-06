@@ -10,7 +10,7 @@
 
 
 #define TICK_SIZE 1e-4
-#define TIME_SPEED 1
+#define TIME_SPEED 1 // Best time speed for moon closeup: (1 / (double) 100)
 
 constexpr double G = 4 * M_PI * M_PI;
 

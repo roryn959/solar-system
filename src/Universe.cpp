@@ -4,43 +4,16 @@
 Universe::Universe() :
 	m_celestialBodies{}
 {
-	CelestialBody sun{ 1.0, 0.00465, Vector{0.0, 0.0}, Vector{ 0.0, 0.0 }, COLOUR_SUN };
-	CelestialBody earth{ 3.003e-6, 0.0000426, Vector{ 1.0, 0.0 }, Vector{ 0, 2 * M_PI }, COLOUR_EARTH };
-	CelestialBody mars{ 3.213e-7, 0.00002, Vector{ 1.381, 0.0 }, Vector{ 0.0, 5.6 }, COLOUR_MARS };
-	CelestialBody mercury{ 1.66e-7, 0.0000163, Vector{ 0.387, 0.0 }, Vector{ 0.0, 10.10 }, COLOUR_MERCURY};
-	CelestialBody venus{2.45e-6, 0.0000405, Vector{ 0.723, 0.0 }, Vector{ 0.0, 7.39 }, COLOUR_VENUS};
-
-	CelestialBody jupiter{
-    9.54e-4,
-    0.000467,
-    Vector{ 5.204, 0.0 },
-    Vector{ 0.0, 2.75 },
-    COLOUR_JUPITER
-};
-
-	CelestialBody saturn{
-    2.86e-4,
-    0.000389,
-    Vector{ 9.582, 0.0 },
-    Vector{ 0.0, 2.03 },
-    COLOUR_SATURN
-};
-
-CelestialBody uranus{
-    4.37e-5,
-    0.000169,
-    Vector{ 19.201, 0.0 },
-    Vector{ 0.0, 1.43 },
-    COLOUR_URANUS
-};
-
-CelestialBody neptune{
-    5.15e-5,
-    0.000164,
-    Vector{ 30.047, 0.0 },
-    Vector{ 0.0, 1.14 },
-    COLOUR_NEPTUNE
-};
+	CelestialBody sun{ 1.0, Vector{0.0, 0.0}, Vector{ 0.0, 0.0 }, COLOUR_SUN, 2 };
+	CelestialBody mercury{ 1.66e-7, Vector{ 0.307, 0.0 }, Vector{ 0.0, 12.59 }, COLOUR_MERCURY, 40 };
+	CelestialBody venus{ 2.45e-6, Vector{ 0.7218, 0.0 }, Vector{ 0.0, 7.39 }, COLOUR_VENUS, 60 };
+	CelestialBody earth{ 3.003e-6, Vector{ 0.983, 0.0 }, Vector{ 0, 6.39 }, COLOUR_EARTH, 90 };
+	CelestialBody moon{ 3.694e-8, earth.GetPosition() + Vector{ 0.00243, 0.0 }, earth.GetVelocity() + Vector{ 0.0, 0.215 }, COLOUR_MOON, 20 };
+	CelestialBody mars{ 3.213e-7, Vector{ 1.382, 0.0 }, Vector{ 0.0, 5.09 }, COLOUR_MARS, 120 };
+	CelestialBody jupiter{ 9.54e-4, Vector{ 4.95, 0.0 }, Vector{ 0.0, 2.89 }, COLOUR_JUPITER, 300 };
+	CelestialBody saturn{ 2.86e-4, Vector{ 8.99, 0.0 }, Vector{ 0.0, 2.13 }, COLOUR_SATURN, 470 };
+	CelestialBody uranus{ 4.37e-5, Vector{ 18.31, 0.0 }, Vector{ 0.0, 1.59 }, COLOUR_URANUS, 750 };
+	CelestialBody neptune{ 5.15e-5, Vector{ 29.77, 0.0 }, Vector{ 0.0, 1.14 }, COLOUR_NEPTUNE, 1100 };
 
 	Vector total_momentum;
 	total_momentum = total_momentum + earth.GetVelocity() * earth.GetMass();
@@ -51,6 +24,7 @@ CelestialBody neptune{
 	m_celestialBodies.push_back(mercury);
 	m_celestialBodies.push_back(venus);
 	m_celestialBodies.push_back(earth);
+	m_celestialBodies.push_back(moon);
 	m_celestialBodies.push_back(mars);
 	m_celestialBodies.push_back(jupiter);
 	m_celestialBodies.push_back(saturn);

@@ -1,8 +1,9 @@
 #pragma once
 
 #include <cstddef>
+#include <vector>
 
-template <typename T, size_t N>
+template <typename T>
 class CircularBuffer {
 
     class Iterator {
@@ -12,7 +13,7 @@ class CircularBuffer {
         const T& operator*() const { return m_buffer[m_pos]; }
 
         Iterator& operator++() {
-            m_pos = ++m_pos % N;
+            m_pos = ++m_pos % m_buffer.GetCapacity();
             ++m_count;
             return *this;
         }
@@ -26,20 +27,24 @@ class CircularBuffer {
     };
 
 public:
-    CircularBuffer(T t) : m_array{t}, m_head{0}, m_size{0} {
-        for (int i=0; i < N; ++i) {
-            push(t);
+    CircularBuffer(T t, int capacity) :
+		m_array(capacity),
+		m_head{0},
+		m_size{0} 
+	{
+        for (int i=0; i < capacity; ++i) {
+            Push(t);
         }
     }
 
-    void push(T t) {
+    void Push(T t) {
         m_array[m_head] = t;
-        m_head = (++m_head) % N;
-        if (m_size < N)
+        m_head = (m_head + 1) % m_array.size();
+        if (m_size < m_array.size())
             ++m_size;
     }
 
-    inline size_t capacity() { return N; }
+    inline size_t GetCapacity() const { return m_array.size(); }
 
     T& 			operator[](std::ptrdiff_t index) 			{ return m_array[index]; }
 	const T& 	operator[](std::ptrdiff_t index) 	const	{ return m_array[index]; }
@@ -50,7 +55,7 @@ public:
     Iterator end()		const	{ return Iterator(*this, m_head, m_size); }
 
 private:
-    T m_array[N];
+    std::vector<T> m_array;
     size_t m_head;
     size_t m_size;
 

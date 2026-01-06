@@ -12,7 +12,10 @@ void Drawer::Render(const Universe& universe) {
 void Drawer::Render(const CelestialBody& celestialBody) {
     const Colour& colour = celestialBody.GetColour();
 
-	const CircularBuffer<Vector, TRAIL_LENGTH>& trail = celestialBody.GetTrail();
+	const CircularBuffer<Vector>& trail = celestialBody.GetTrail();
+
+	double trailOpacityDiff = SDL_ALPHA_OPAQUE / (double) trail.GetCapacity();
+
 	double opacity{ 0 };
 
 	Vector lastPosition = *trail.begin();
@@ -26,6 +29,6 @@ void Drawer::Render(const CelestialBody& celestialBody) {
 			graphToWindowY(position[1])
 		);
 		lastPosition = position;
-		opacity += TRAIL_OPACITY_DIFF;
+		opacity += trailOpacityDiff;
 	}
 }
